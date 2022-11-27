@@ -3,7 +3,7 @@ import styles from './FormFunc.module.sass'
 
 export function FormFunc(props) {
     const [count, setCount] = useState(0)
-    const [name, setName] = useState('Bob')
+    const [name, setName] = useState('Bobo')
 
     const handleClick = () => {
         setCount(count+1)
