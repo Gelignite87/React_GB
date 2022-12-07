@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
-import { ChildFunc } from "./components/ChildFunc";
+import { useEffect, useState, useCallback, useRef } from "react"
+import { ChildFuncMemo } from "./components/ChildFuncMemo"
 import styles from './FormFunc.module.sass'
-import { Button } from "./ui/Button";
 
 export function FormFunc(props) {
     const [count, setCount] = useState(0)
     const [name, setName] = useState('GB')
     const [show, setShow] = useState(true)
+    const myRef = useRef()
 
-    console.log('log FormFunc');
+    console.log('log FormFunc')
 
-    const handleClick = () => {
-        setCount(count+1)
-    }
+    const handleClick = useCallback(() => { setCount((prevCount) => prevCount+1) }, [])
+    const handleChange = (event) => {setName(event.target.value)}
+    const handleShow = () => {setShow(!show)}
 
-    const handleChange = (event) => {
-        setName(event.target.value)
-    }
-
-    const handleShow = () => {
-        setShow(!show)
-    }
-
+    useEffect(() => {console.log('FormFunc did mount')}, [])
     useEffect(() => {
-        console.log('FormFunc did mount');
-    }, [])
-    
-    useEffect(() => {
-        console.log('FormFunc did update');
+        console.log('FormFunc did update')
+        console.log(myRef.current.textContent)
     }, [count])
 
     return (
@@ -35,10 +25,10 @@ export function FormFunc(props) {
             <h1 style={{color:'green'}}>{props.title}</h1>
             <h2 className={styles.border}>Name: {name}</h2>
             <input type="text" onChange={handleChange} />
-            <p>COUNT: {count}</p>
+            <p ref={myRef}>COUNT: {count}</p>
             <button onClick={handleShow}>Show</button>
-            <Button type='button' className='btn' onClick={handleClick}>Click in FormFunc</Button>
-            {show && <ChildFunc/>}
+            <button onClick={handleClick}>Click in FormFunc</button>
+            {show && <ChildFuncMemo handleClick={handleClick}/>}
         </>
     )
 }

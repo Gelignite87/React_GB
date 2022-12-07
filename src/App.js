@@ -4,7 +4,7 @@ import { FormFunc } from './components/func/FormFunc';
 
 export function App() {
   const [toggle, setToggle] = useState(true)
-  const [arr] = useState([{ name: 'Biba' }, { name: 'Boba' }, { name: 'Giga' }, { name: 'Goga' },])
+  const [messageList] = useState([{ text: 'Biba', autor: 'noname' }, { text: 'Boba', autor: 'noname' }, { text: 'Giga', autor: 'noname' }, { text: 'Goga', autor: 'noname' },])
   return (
     <>
       <button onClick={() => setToggle(!toggle)}>Toggle</button>
@@ -12,7 +12,12 @@ export function App() {
       <h2>{toggle ? 'Function Component' : 'Classes Component'}</h2>
       {toggle ? <FormFunc title='Function Component' /> : <FormClass />}
       <ul>
-        {arr.map((item) => (<li key={item.name}>{item.name}</li>))}
+        <h2 className='DZ'>Домашнее задание:</h2>
+        {messageList.map((item) => (<li key={item.text}>Text: {item.text}, Autor: {item.autor}</li>))}
+        <form>
+          <input type="text" />
+          <button>Отправка формы</button>
+        </form>
       </ul>
     </>
   );
