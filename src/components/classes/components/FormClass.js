@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ChildClass } from "./components/ChildClass";
+import { ChildClass } from "./ChildClass";
 
 export class FormClass extends Component {
     state = {

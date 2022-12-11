@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { Button } from "./ui/Button"
+import { Button } from "./func/ui/Button"
 
-export const Form = ({ addMessage }) => {
+export const Form = ({ handleAddMessage }) => {
     const [text, setText] = useState('')
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        addMessage({ author: 'user', text })
+        handleAddMessage({ author: 'user', text })
         setText('')
     }
 
