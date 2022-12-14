@@ -3,9 +3,11 @@ import { useParams, Navigate } from 'react-router-dom'
 import { Form } from '../components/FormSubmit'
 import { MessageList } from '../components/MessageList'
 import { ChatList } from '../components/ChatList'
+import { HOCWithClasses } from "../utils/HOCWithClasses";
 
 export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
   const { chatId } = useParams()
+  const MessageListWithClasses = HOCWithClasses(MessageList)
 
   useEffect(() => {
     if (chatId && messages[chatId]?.length > 0 && messages[chatId][messages[chatId].length - 1].author === 'user') {
@@ -24,7 +26,7 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
       <h1>Welcome to chat!</h1>
       <ChatList chats={chats} onAddChat={onAddChat} />
       <Form handleAddMessage={handleAddMessage} />
-      <MessageList messages={chatId ? messages[chatId] : []} />
+      <MessageListWithClasses messages={chatId ? messages[chatId] : []} classes="border" />
     </>
   )
 }

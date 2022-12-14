@@ -6,6 +6,7 @@ import { MainPage } from './pages/MainPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList'
+import { ThemeContext, defaultContext } from './utils/ThemeContext';
 
 export function App() {
   // 1 // const [toggle, setToggle] = useState(true)
@@ -13,6 +14,7 @@ export function App() {
     [{ author: 'user', text: 'one text' }],
     [{ author: 'user', text: 'two text' }]
   ])
+  const [theme, setTheme] = useState(defaultContext.theme)
 
   // 2 // const addMessage = useCallback((newMessage) => {
   //   setMessages([...messages, newMessage])
@@ -39,6 +41,10 @@ export function App() {
     setMessages({ ...messages, [chatId]: [...messages[chatId], newMassage] })
   }
 
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+  }
+
   return (
     <>
       {/* 1 // <button onClick={() => setToggle(!toggle)}>Toggle</button>
@@ -49,17 +55,19 @@ export function App() {
       <Form addMessage={addMessage} />
       <MessageList messages={messages} /> */}
 
-      <Routes>
-        <Route path='/' element={<Header />}>
-          <Route index element={<MainPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="chats">
-            <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
-            <Route path=":chatId" element={<ChatsPage chats={chats} messages={messages} onAddMessage={onAddMessage} onAddChat={onAddChat} />} />
+      <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <Routes>
+          <Route path='/' element={<Header />}>
+            <Route index element={<MainPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="chats">
+              <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
+              <Route path=":chatId" element={<ChatsPage chats={chats} messages={messages} onAddMessage={onAddMessage} onAddChat={onAddChat} />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<h2>404 Page not found!</h2>} />
-      </Routes>
+          <Route path="*" element={<h2>404 Page not found!</h2>} />
+        </Routes>
+      </ThemeContext.Provider>
     </>
   );
 }
