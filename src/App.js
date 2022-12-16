@@ -7,6 +7,8 @@ import { ProfilePage } from './pages/ProfilePage'
 import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList'
 import { ThemeContext, defaultContext } from './utils/ThemeContext';
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 export function App() {
   // 1 // const [toggle, setToggle] = useState(true)
@@ -55,19 +57,21 @@ export function App() {
       <Form addMessage={addMessage} />
       <MessageList messages={messages} /> */}
 
-      <ThemeContext.Provider value={{theme, toggleTheme}}>
-        <Routes>
-          <Route path='/' element={<Header />}>
-            <Route index element={<MainPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="chats">
-              <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
-              <Route path=":chatId" element={<ChatsPage chats={chats} messages={messages} onAddMessage={onAddMessage} onAddChat={onAddChat} />} />
+      <Provider store={store}>
+        <ThemeContext.Provider value={{theme, toggleTheme}}>
+          <Routes>
+            <Route path='/' element={<Header />}>
+              <Route index element={<MainPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="chats">
+                <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
+                <Route path=":chatId" element={<ChatsPage chats={chats} messages={messages} onAddMessage={onAddMessage} onAddChat={onAddChat} />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="*" element={<h2>404 Page not found!</h2>} />
-        </Routes>
-      </ThemeContext.Provider>
+            <Route path="*" element={<h2>404 Page not found!</h2>} />
+          </Routes>
+        </ThemeContext.Provider>
+      </Provider>
     </>
   );
 }
