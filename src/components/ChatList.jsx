@@ -1,21 +1,17 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom'
-import { nanoid } from 'nanoid'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addChat } from "../store/messages/actions";
+import { selectChat } from "../store/messages/selectors";
 
-export function ChatList({onAddChat, chats}) {
+export function ChatList() {
   const [value, setValue] = useState('')
   const dispatch = useDispatch()
-
-  const handleChange = (e) => {
-    setValue(e.target.value)
-  }
+  const chats = useSelector(selectChat)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // onAddChat({ id: nanoid(), name: value })
-    dispatch(addChat)
+    dispatch(addChat(value))
   }
 
   return (
@@ -29,7 +25,7 @@ export function ChatList({onAddChat, chats}) {
       </ul>
       <h1>ChatList</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange}/>
+        <input type="text" value={value} onChange={(e)=> setValue(e.target.value)}/>
         <button type="submit">Create Chat</button>
       </form>
     </>

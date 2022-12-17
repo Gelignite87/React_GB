@@ -1,2 +1,3 @@
-export const selectName = (state) => state.profile.name
-// export const selectChecked = (state) => state.profile.checked
+import { nanoid } from "nanoid";
+
+export const selectChat = (state) => Object.keys(state.messages).map((chat) => ({id: nanoid(), name: chat}))

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Button } from "./func/ui/Button"
-import { useDispatch } from "react-redux";
 
 export const Form = ({ handleAddMessage }) => {
     const [text, setText] = useState('')

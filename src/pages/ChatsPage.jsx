@@ -24,7 +24,7 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
   return (
     <>
       <h1>Welcome to chat!</h1>
-      <ChatList chats={chats} onAddChat={onAddChat} />
+      <ChatList />
       <Form handleAddMessage={handleAddMessage} />
       <MessageListWithClasses messages={chatId ? messages[chatId] : []} classes="border" />
     </>
