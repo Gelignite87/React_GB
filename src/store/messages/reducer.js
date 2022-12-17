@@ -1,20 +1,18 @@
 import * as types from "./types";
 
 const initialState = {
-    name: 'Goga',
-    checked: true
-
+    default: [
+        { author: 'user', text: 'one text' },
+        { author: 'user', text: 'two text' }
+    ]
 }
 
-export const profileReducer = (state = initialState, action) => {
+export const messagesReducer = (state = initialState, action) => {
     const {type, payload} = action
     switch (type) {
-        case types.CHANGE_NAME:
-            return { ...state, name: payload }
-        case types.CHANGE_CHECKBOX:
-            return {...state, checked: payload}
+        case types.ADD_CHAT:
+            return { ...state, [payload]:[] }
 
         default:
             return state;
-}
-}
+}}

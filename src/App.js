@@ -12,10 +12,12 @@ import { store } from "./store";
 
 export function App() {
   // 1 // const [toggle, setToggle] = useState(true)
-  const [messages, setMessages] = useState([
-    [{ author: 'user', text: 'one text' }],
-    [{ author: 'user', text: 'two text' }]
-  ])
+  const [messages, setMessages] = useState({
+    default: [
+      { author: 'user', text: 'one text' },
+      { author: 'user', text: 'two text' }
+    ]
+  })
   const [theme, setTheme] = useState(defaultContext.theme)
 
   // 2 // const addMessage = useCallback((newMessage) => {

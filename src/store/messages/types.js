@@ -1,2 +1,1 @@
-export const CHANGE_NAME = 'CHANGE_NAME'
-export const CHANGE_CHECKBOX = 'CHANGE_CHECKBOX'
+export const ADD_CHAT = 'ADD_CHAT'
