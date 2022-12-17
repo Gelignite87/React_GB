@@ -2,10 +2,11 @@ import { useContext, useState } from 'react';
 import { ThemeContext } from '../utils/ThemeContext';
 import { useSelector, useDispatch } from "react-redux";
 import { changeName } from "../store/profile/actions";
+import { selectName } from "../store/profile/selectors";
 
 export function ProfilePage() {
   const { theme, toggleTheme } = useContext(ThemeContext)
-  const name = useSelector((store) => store.name)
+  const name = useSelector(selectName)
   const checked = useSelector((store) => store.checked)
   const [value, setValue] = useState('')
   const dispatch = useDispatch()
