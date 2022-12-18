@@ -1,12 +1,18 @@
 import { useState } from "react"
 import { Button } from "./func/ui/Button"
+import { useDispatch } from "react-redux";
+import { addMessage } from "../store/messages/actions";
+import { useParams } from "react-router-dom";
 
-export const Form = ({ handleAddMessage }) => {
+export const Form = () => {
     const [text, setText] = useState('')
+    const dispatch = useDispatch()
+    const {chatId} = useParams()
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleAddMessage({ author: 'user', text })
+        // handleAddMessage({ author: 'user', text })
+        dispatch(addMessage(chatId, text))
         setText('')
     }
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { addChat } from "../store/messages/actions";
+import { addChat, deleteChat } from "../store/messages/actions";
 import { selectChat } from "../store/messages/selectors";
 
 export function ChatList() {
@@ -20,6 +20,7 @@ export function ChatList() {
         {chats.map((chat) => (
           <li key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+            <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
           </li>
         ))}
       </ul>
