@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button } from "./func/ui/Button"
 import { useDispatch } from "react-redux";
-import { addMessage } from "../store/messages/actions";
+import { addMessageWithReply } from "../store/messages/actions";
 import { useParams } from "react-router-dom";
 
 export const Form = () => {
@@ -12,7 +12,11 @@ export const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // handleAddMessage({ author: 'user', text })
-        dispatch(addMessage(chatId, text))
+        // dispatch(addMessage(chatId, text))
+        dispatch(addMessageWithReply(chatId, {
+            author: 'user',
+            text
+        }))
         setText('')
     }
 

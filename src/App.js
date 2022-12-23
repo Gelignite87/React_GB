@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+// import { PersistGate } from 'redux-persist/integration/react'
 import { Header } from './components/Header'
 import { MainPage } from './pages/MainPage'
 import { ProfilePage } from './pages/ProfilePage'
@@ -7,7 +8,7 @@ import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList'
 import { ThemeContext, defaultContext } from './utils/ThemeContext';
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store, persistor } from "./store";
 
 export function App() {
   // 1 // const [toggle, setToggle] = useState(true)
@@ -59,19 +60,21 @@ export function App() {
       <MessageList messages={messages} /> */}
 
       <Provider store={store}>
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
-          <Routes>
-            <Route path='/' element={<Header />}>
-              <Route index element={<MainPage />} />
-              <Route path="profile" element={<ProfilePage />} />
-              <Route path="chats">
-                <Route index element={<ChatList />} />
-                <Route path=":chatId" element={<ChatsPage />} />
+        {/* <PersistGate persistor={persistor}> */}
+          <ThemeContext.Provider value={{theme, toggleTheme}}>
+            <Routes>
+              <Route path='/' element={<Header />}>
+                <Route index element={<MainPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+                <Route path="chats">
+                  <Route index element={<ChatList />} />
+                  <Route path=":chatId" element={<ChatsPage />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="*" element={<h2>404 Page not found!</h2>} />
-          </Routes>
-        </ThemeContext.Provider>
+              <Route path="*" element={<h2>404 Page not found!</h2>} />
+            </Routes>
+          </ThemeContext.Provider>
+        {/* </PersistGate> */}
       </Provider>
     </>
   );

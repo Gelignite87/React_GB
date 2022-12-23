@@ -17,7 +17,7 @@ export const messagesReducer = (state = initialState, action) => {
             delete chats[payload]
             return chats
         case types.ADD_MESSAGE:
-            return { ...state, [payload.chatName]: [...state[payload.chatName], { author: 'user', text: payload.text }] }
+            return { ...state, [payload.chatName]: [...state[payload.chatName], { author: 'user', text: payload.text.text }] }
 
         default:
             return state;
