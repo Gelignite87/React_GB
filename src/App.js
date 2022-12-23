@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-// import { PersistGate } from 'redux-persist/integration/react'
 import { Header } from './components/Header'
 import { MainPage } from './pages/MainPage'
 import { ProfilePage } from './pages/ProfilePage'
@@ -8,7 +7,7 @@ import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList'
 import { ThemeContext, defaultContext } from './utils/ThemeContext';
 import { Provider } from "react-redux";
-import { store, persistor } from "./store";
+import { store } from "./store";
 
 export function App() {
   // 1 // const [toggle, setToggle] = useState(true)
@@ -60,7 +59,6 @@ export function App() {
       <MessageList messages={messages} /> */}
 
       <Provider store={store}>
-        {/* <PersistGate persistor={persistor}> */}
           <ThemeContext.Provider value={{theme, toggleTheme}}>
             <Routes>
               <Route path='/' element={<Header />}>
@@ -74,7 +72,6 @@ export function App() {
               <Route path="*" element={<h2>404 Page not found!</h2>} />
             </Routes>
           </ThemeContext.Provider>
-        {/* </PersistGate> */}
       </Provider>
     </>
   );
