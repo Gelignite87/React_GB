@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '@mui/material/Card';
+import { useSelector, useDispatch } from "react-redux";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -7,43 +8,34 @@ import { CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { fetchDataMiddleware } from "../store/articles/actions"
 
 export function Articles() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
-  const getFetchArticles = async () => {
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch('https://api.spaceflightnewsapi.net/v3/articles')
-      if(res.ok) {
-        const data = await res.json()
-        setArticles(data)
-      }
-    } catch (error) {
-      setError(error.message)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const aData = useSelector((store) => store.articles)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    // fetch(api)
-    //   .then((res) => res.json())
-    //   .then((data) => setArticles(data))
-    // getFetchArticles()
-  }, [])
+    setError('')
+    setArticles(aData)
+    setLoading(false)
+    if (aData[0].error) {
+      setError(aData[0].error)
+    }
+  }, [aData])
 
   return (
     <>
       <div>Articles</div>
       <Button 
-        variant="contained" 
+        variant="contained"
         color="success"
-        onClick={getFetchArticles}
-      >
+        onClick={ () => {
+          dispatch(fetchDataMiddleware('https://api.spaceflightnewsapi.net/v3/articles'));
+          setLoading(true)
+        }}>
         Get API
       </Button>
       {loading && (
@@ -51,9 +43,9 @@ export function Articles() {
           <CircularProgress />
         </Box>
       )}
-      {!loading && articles.map((article) => (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Card sx={{ maxWidth: 345 }} key={article.id}>
+      {!loading && !error && articles.map((article) => (
+        <Box key={article.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
               <CardMedia
                 component="img"
