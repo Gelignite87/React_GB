@@ -8,57 +8,17 @@ import { ChatList } from './components/ChatList'
 import { ThemeContext, defaultContext } from './utils/ThemeContext';
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { Articles } from './pages/ArticlesPage'
+import { SingIn } from './pages/SignInPage'
+import { SignUp } from './pages/SignUpPage'
 
 export function App() {
-  // 1 // const [toggle, setToggle] = useState(true)
-  // const [messages, setMessages] = useState({
-  //   default: [
-  //     { author: 'user', text: 'one text' },
-  //     { author: 'user', text: 'two text' }
-  //   ]
-  // })
   const [theme, setTheme] = useState(defaultContext.theme)
-
-  // 2 // const addMessage = useCallback((newMessage) => {
-  //   setMessages([...messages, newMessage])
-  // },[messages])
-
-  // useEffect(() => {
-  //   if (messages.length>0 && messages[messages.length-1].author ==='user') {
-  //     const timeout = setTimeout(() => {
-  //       addMessage({author: 'bot', text: 'I\'m BOT'})
-  //     }, 1500)
-  //     return () => { clearTimeout(timeout) }
-  //   }
-  // }, [messages, addMessage])
-
-  // const chats = Object.keys(messages).map((chat) => {
-  //   return ({ id: nanoid(), name:chat })
-  // })
-
-  // const onAddChat = (newChat) => {
-  //   setMessages({...messages,[newChat.name]: []})
-  // }
-
-  // const onAddMessage = (chatId, newMassage) => {
-  //   setMessages({ ...messages, [chatId]: [...messages[chatId], newMassage] })
-  // }
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
+  const toggleTheme = () => {setTheme(theme === 'light' ? 'dark' : 'light')}
 
   return (
     <>
-      {/* 1 // <button onClick={() => setToggle(!toggle)}>Toggle</button>
-      <hr />
-      <h2>{toggle ? 'Function Component' : 'Classes Component'}</h2>
-      {toggle ? <FormFunc title='Function Component' /> : <FormClass />} */}
-      {/* 2 // <h1>Welcome to chat!</h1>
-      <Form addMessage={addMessage} />
-      <MessageList messages={messages} /> */}
-
-      <Provider store={store}>
+        <Provider store={store}>
           <ThemeContext.Provider value={{theme, toggleTheme}}>
             <Routes>
               <Route path='/' element={<Header />}>
@@ -68,11 +28,14 @@ export function App() {
                   <Route index element={<ChatList />} />
                   <Route path=":chatId" element={<ChatsPage />} />
                 </Route>
+                  <Route path="articles" element={<Articles />} />
+                  <Route path="singin" element={<SingIn />} />
+                  <Route path="signup" element={<SignUp />} />
               </Route>
               <Route path="*" element={<h2>404 Page not found!</h2>} />
             </Routes>
           </ThemeContext.Provider>
-      </Provider>
+        </Provider>
     </>
   );
 }

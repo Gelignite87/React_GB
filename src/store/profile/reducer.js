@@ -12,7 +12,9 @@ export const profileReducer = (state = initialState, action) => {
         case types.CHANGE_NAME:
             return { ...state, name: payload }
         case types.CHANGE_CHECKBOX:
-            return {...state, checked: payload}
+            return { ...state, checked: payload }
+        case types.IS_AUTH:
+            return { ...state, isAuth: payload }
 
         default:
             return state;

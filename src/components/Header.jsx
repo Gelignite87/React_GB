@@ -1,12 +1,18 @@
 import { Outlet, NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export const navigate = [
-  {id: 1, name: 'Main', to: '/'},
-  {id: 2, name: 'Profile', to: '/profile'},
-  {id: 3, name: 'Chat', to: '/chats'},
+  { id: 1, name: 'Main', to: '/' },
+  { id: 2, name: 'Profile', to: '/profile' },
+  { id: 3, name: 'Chat', to: '/chats' },
+  { id: 4, name: 'About', to: '/about' },
+  { id: 5, name: 'Articles', to: '/articles' },
+  { id: 6, name: 'SingIn', to: '/singin' },
+  { id: 7, name: 'SingUp', to: '/signup' }
 ]
 
 export function Header() {
+  const name = useSelector((store) => store.name)
   return (
     <>
       <header>
@@ -19,6 +25,7 @@ export function Header() {
                 })}>{link.name}</NavLink></li>
             ))}
           </ul>
+          <p>{name}</p>
         </nav>
       </header>
       <main>
