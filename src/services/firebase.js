@@ -3,12 +3,12 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getDatabase, ref } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCYi02HFdOqO0yWG1ZUaSvu6zz34lMpWw4",
-  authDomain: "react-gb-2022.firebaseapp.com",
-  projectId: "react-gb-2022",
-  storageBucket: "react-gb-2022.appspot.com",
-  messagingSenderId: "963271718519",
-  appId: "1:963271718519:web:afb86075d14e80ccd5f872"
+  apiKey: "AIzaSyAllRYd35oQgFnGZZCyAk4NOyKsbSEozZY",
+  authDomain: "gb-285061.firebaseapp.com",
+  projectId: "gb-285061",
+  storageBucket: "gb-285061.appspot.com",
+  messagingSenderId: "506223164895",
+  appId: "1:506223164895:web:eb11826187d5f8b4b1186a"
 };
 
 // Initialize Firebase
@@ -25,9 +25,9 @@ export const logOut = async () => await signOut(firebaseAuth)
 const db = getDatabase(app)
 
 export const userRef = ref(db, 'user')
+export const messagesRef = ref(db, 'messages')
 
-// export const messagesRef = ref(db, 'messages')
+export const getChatById = (chatId) => ref(db, `messages/${chatId}`)
 
-// export const getChatById = (chatId) => ref(db, `messages/${chatId}`)
+export const getMessageListById = (chatId) => ref(db, `messages/${chatId}/messageList`)
 
-// export const getMessageListById = (chatId) => ref(db, `messages/${chatId}/messageList`)

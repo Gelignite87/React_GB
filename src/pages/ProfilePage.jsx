@@ -1,28 +1,42 @@
-import { useContext, useState } from 'react';
-import { ThemeContext } from '../utils/ThemeContext';
-import { useSelector, useDispatch } from "react-redux";
-import { changeName } from "../store/profile/actions";
-import { selectName } from "../store/profile/selectors";
+import { useContext, useState } from 'react'
+import { ThemeContext } from '../utils/ThemeContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { changeName, toggleProfile } from '../store/profile/actions'
+import { selectName, selectVisible } from '../store/profile/selectors'
 
 export function ProfilePage() {
   const { theme, toggleTheme } = useContext(ThemeContext)
   const name = useSelector(selectName)
-  const checked = useSelector((store) => store.profile.checked)
+  const visible = useSelector(selectVisible)
   const [value, setValue] = useState('')
+
   const dispatch = useDispatch()
+
+  /*
+  const hendleChange = () => {
+    console.log(value)
+    dispatch(changeName(value))
+    setValue('')
+  }
+  */
+
   return (
     <>
       <h1>Profile Page</h1>
-      <p>{theme === 'light' ? 'День' : 'Ночь'}</p>
+      <p>{theme === 'light' ? '🌞' : '🌙'}</p>
       <button onClick={toggleTheme}>Change theme</button>
       <hr />
       <h2>{name}</h2>
-      <input type='text' value={value} onChange={(e)=> setValue(e.target.value)} />
-      <button onClick={() => { dispatch(changeName(value)) }}>Change name</button>
+      <input type="checkbox" checked={visible} readOnly />
+      <button onClick={() => dispatch(toggleProfile())} >change visible</button>
       <br />
-      <label>
-        <input type='checkbox' className='DZ' checked={checked} onChange={() => dispatch({ type: 'CHANGE_CHECKBOX', payload: !checked })}></input> 
-      &nbsp;Checkbox: <span className='DZ'>{checked.toString().toUpperCase()}</span></label>
+      <input 
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      {/* <button onClick={hendleChange}>Change name</button> */}
+      <button onClick={() => dispatch(changeName(value))}>Change name</button>
     </>
   )
 }

@@ -1,32 +1,37 @@
-import * as types from "./types";
+import { AUTHOR } from '../../constants'
+
+export const ADD_CHAT = 'ADD_CHAT'
+export const DELETE_CHAT = 'DELETE_CHAT'
+export const ADD_MESSAGE = 'ADD_MESSAGE'
+
 
 export const addChat = (newChat) => ({
-        type: types.ADD_CHAT,
-        payload: newChat
+  type: ADD_CHAT,
+  payload: newChat
 })
 
 export const deleteChat = (chatName) => ({
-        type: types.DELETE_CHAT,
-        payload: chatName
+  type: DELETE_CHAT,
+  payload: chatName
 })
 
 export const addMessage = (chatName, text) => ({
-        type: types.ADD_MESSAGE,
-        payload: { chatName, text }
+  type: ADD_MESSAGE,
+  payload: { chatName, text }
 })
 
 let timeout
 export const addMessageWithReply = (chatName, message) => (dispatch) => {
   dispatch(addMessage(chatName, message))
 
-  if (message.author !== 'bot') {
+  if (message.author !== AUTHOR.bot) {
     if (timeout) {
       clearTimeout(timeout)
     }
 
     timeout = setTimeout(() => {
       dispatch(addMessage(chatName, {
-        author: 'bot',
+        author: AUTHOR.bot,
         text: 'Im bot'
       }))
     }, 1000)

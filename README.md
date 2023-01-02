@@ -1,8 +1,5 @@
-# React_GB
-
-React с курса GeekBrains
-
 # Getting Started with Create React App
+# '🌞' : '🌙'
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
