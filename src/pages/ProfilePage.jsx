@@ -7,7 +7,7 @@ import { selectName } from "../store/profile/selectors";
 export function ProfilePage() {
   const { theme, toggleTheme } = useContext(ThemeContext)
   const name = useSelector(selectName)
-  const checked = useSelector((store) => store.checked)
+  const checked = useSelector((store) => store.profile.checked)
   const [value, setValue] = useState('')
   const dispatch = useDispatch()
   return (

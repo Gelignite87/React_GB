@@ -5,10 +5,9 @@ export const navigate = [
   { id: 1, name: 'Main', to: '/' },
   { id: 2, name: 'Profile', to: '/profile' },
   { id: 3, name: 'Chat', to: '/chats' },
-  { id: 4, name: 'About', to: '/about' },
-  { id: 5, name: 'Articles', to: '/articles' },
-  { id: 6, name: 'SingIn', to: '/singin' },
-  { id: 7, name: 'SingUp', to: '/signup' }
+  { id: 4, name: 'Articles', to: '/articles' },
+  { id: 5, name: 'SingIn', to: '/signin' },
+  { id: 6, name: 'SingUp', to: '/signup' }
 ]
 
 export function Header() {

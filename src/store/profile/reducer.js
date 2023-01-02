@@ -3,7 +3,6 @@ import * as types from "./types";
 const initialState = {
     name: 'Goga',
     checked: true
-
 }
 
 export const profileReducer = (state = initialState, action) => {
