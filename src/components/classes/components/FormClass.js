@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { ChildClass } from "./ChildClass";
 
 export class FormClass extends Component {
     state = {
         name: 'Biba',
-        count: 0
+        count: 0,
+        show: true
     }
 
     handleChange = (event) => {
@@ -15,14 +17,24 @@ export class FormClass extends Component {
         this.setState((prevState)=>({count: prevState.count + 1}))
     }
 
+    handleShow = () => {
+        this.setState({show: !this.state.show})
+    }
+
+    componentDidMount() {
+        console.log('FormClass did mount');
+    }
+
     render() {
         return (
             <>
                 <h1>Classes Component</h1>
-                <h2>Name: {this.state.name}</h2>
+                {/* <h2>Name: {this.state.name}</h2>
                 <input type="text" onChange={this.handleChange} />
                 <p>COUNT: {this.state.count}</p>
-                <button onClick={this.handleClick}>Click</button>
+                <button onClick={this.handleClick}>Click</button> */}
+                <button onClick={this.handleShow}>Show</button>
+                {this.state.show && <ChildClass/>}
             </>
         )
     }
